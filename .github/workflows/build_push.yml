@@ -96,7 +96,7 @@ jobs:
         with:
           sketch-names: MarauderOTA.ino
           arduino-board-fqbn: esp32:esp32:esp32s2
-          platform-url: https://github.com/espressif/arduino-esp32/releases/download/2.0.3/package_esp32_dev_index.json
+          platform-url: https://github.com/espressif/arduino-esp32/releases/download/2.0.9/package_esp32_dev_index.json
           
       - name: Replace SD lib
         run: |
@@ -132,13 +132,13 @@ jobs:
       - name: Build Marauder for Flipper Zero Multi Board
         uses: ArminJo/arduino-test-compile@v3.2.0
         with:
-          sketch-names: esp32_marauder.ino
-          arduino-board-fqbn: esp32:esp32:esp32s3:PartitionScheme=min_spiffs,FlashSize=8M,PSRAM=enabled
+          sketch-names: esp32c3_marauder.ino
+          arduino-board-fqbn: esp32:esp32:esp32c3:PartitionScheme=min_spiffs,FlashSize=8M,PSRAM=enabled
           extra-arduino-cli-args: "--warnings none"
           
       - name: Rename Marauder Multi Board bin
         run: |
-          mv ./esp32_marauder/build/esp32.esp32.esp32s3/esp32_marauder.ino.bin ./esp32_marauder/build/esp32.esp32.esp32s3/esp32_marauder.multiboardS3.bin
+          mv ./esp32_marauder/build/esp32.esp32.esp32c3/esp32_marauder.ino.bin ./esp32_marauder/build/esp32.esp32.esp32c3/esp32_marauder.multiboardC3.bin
          
       - name: Configure TFT_eSPI and configs.h for OG Marauder
         run: |
@@ -296,8 +296,8 @@ jobs:
       - name: 'Upload MultiboardS3 Artifact'
         uses: actions/upload-artifact@v3
         with:
-          name: esp32_marauder.multiboardS3.bin
-          path: ./esp32_marauder/build/esp32.esp32.esp32s3/esp32_marauder.multiboardS3.bin
+          name: esp32_marauder.multiboardC3.bin
+          path: ./esp32_marauder/build/esp32.esp32.esp32c3/esp32_marauder.multiboardC3.bin
           retention-days: 5
           
       - name: 'Upload OG Artifact'
